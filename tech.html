@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sonet – Products</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+    <link rel="manifest" href="assets/site.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+  
+</head>
+<body>
+  <div class="page">
+    <!-- HEADER -->
+    <header>
+      
+        <div class="logo">
+    <img src="logoT.png" class="logo-img">
+        <!-- <div class="logo-symbol"></div> -->
+          <div class="logo-text">
+          <span class="logo-text-main"></span>
+          <span class="logo-text-sub"></span>
+        </div> 
+      </div>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact</a>
+        <button class="nav-cta" onclick="window.location.href='contact.html#contact-main'">
+          <span>Request demo</span>
+          <span class="icon">➜</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- PRODUCTS PAGE MAIN -->
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <!-- <h2 class="section-title">CRYPTO</h2> -->
+          
+
+
+          <section>
+
+            
+<div class="cc-wrap">
+  <div class="cc-heading">
+    <h2>SONET Crypto Counter</h2>
+    <p>How TX and RX create an unhackable interaction log</p>
+  </div>
+  <div class="cc-pips" id="cc-pips"></div>
+  <div id="cc-stage"></div>
+  <div class="cc-nav">
+    <button onclick="ccMove(-1)">← Back</button>
+    <span class="cc-nav-info" id="cc-nav-info"></span>
+    <button onclick="ccMove(1)">Next →</button>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+
+
+<div class="cc-root">
+  <h2>Crypto Visualization</h2>
+  <br>
+  <br>
+  <br>
+ 
+  <div class="cc-steps">
+    <button class="cc-sbtn on" onclick="ccGo(0)"><span class="sn">01</span>Key pairing</button>
+    <button class="cc-sbtn"   onclick="ccGo(1)"><span class="sn">02</span>TX beacon</button>
+    <button class="cc-sbtn"   onclick="ccGo(2)"><span class="sn">03</span>RX verify</button>
+    <button class="cc-sbtn"   onclick="ccGo(3)"><span class="sn">04</span>Spoof fails</button>
+    <button class="cc-sbtn"   onclick="ccGo(4)"><span class="sn">05</span>Hash chain</button>
+    <button class="cc-sbtn"   onclick="ccGo(5)"><span class="sn">06</span>Guarantee</button>
+  </div>
+ 
+  <div class="cc-canvas" id="cc-canvas"></div>
+ 
+</div>
+ 
+ 
+          </section>
+
+          
+<script>
+(function(){
+var S=[
+  {
+    title:"Device pairing — shared secret burned in",
+    who:"both", badge:"cc-badge-both", whoLabel:"TX + RX factory setup", step:"Stage 1 of 6",
+    left:{label:"TX unit (X915)",
+      code:"DeviceID_TX = <span class='hi'>TX-9A3F-K72</span>\nSecret_K    = <span class='hi'>a9f3c81d...e72b</span>  (256-bit)\nCounter_TX  = <span class='ok'>0</span>",
+      note:"A unique 256-bit secret key K is burned into flash at the factory. It never leaves the device and is never transmitted over LoRa."
+    },
+    right:{label:"RX unit (V420)",
+      code:"DeviceID_RX = <span class='hi'>RX-2B7C-P14</span>\nSecret_K    = <span class='hi'>a9f3c81d...e72b</span>  (same K)\nCounter_RX  = <span class='ok'>0</span>",
+      note:"The paired RX receives the identical K during factory provisioning. The pair is registered in SONET's central ledger at manufacture."
+    },
+    insight:{type:"",icon:"🔑",text:"K is never broadcast over the air. An attacker listening to every LoRa packet will never see a single byte of K."}
+  },
+  {
+    title:"TX broadcasts a signed beacon",
+    who:"tx", badge:"cc-badge-tx", whoLabel:"TX unit", step:"Stage 2 of 6",
+    left:{label:"TX generates beacon",
+      code:"Counter_TX = <span class='hi'>1</span>\nTimestamp  = <span class='hi'>1711023847</span>\n\nHMAC_input = DeviceID_TX\n           + Counter_TX\n           + Timestamp\n\nMAC = HMAC-SHA256(<span class='warn'>K</span>, HMAC_input)\n    = <span class='ok'>f3a8c1...9d42</span>  (first 8 bytes)",
+      note:"TX increments its counter, takes the current Unix timestamp, and signs the combination with K using HMAC-SHA256."
+    },
+    right:{label:"LoRa packet broadcast",
+      code:"[ DeviceID_TX ]  TX-9A3F-K72\n[ Counter     ]  1\n[ Timestamp   ]  1711023847\n[ MAC         ]  f3a8c1...9d42\n\n<span class='bad'>K is NOT in this packet.</span>",
+      note:"Only the device ID, counter, timestamp, and MAC are sent over LoRa. Any radio scanner can read these — but K cannot be derived from them."
+    },
+    insight:{type:"",icon:"📡",text:"Counter + Timestamp + HMAC is a one-time token. Replaying the same packet a second later fails because the timestamp check rejects anything older than 5 seconds."}
+  },
+  {
+    title:"RX receives and verifies the beacon",
+    who:"rx", badge:"cc-badge-rx", whoLabel:"RX unit", step:"Stage 3 of 6",
+    left:{label:"RX recomputes MAC",
+      code:"Received:\n  DeviceID = TX-9A3F-K72  ✓ paired\n  Counter  = 1\n  Timestamp= 1711023847\n  MAC_recv = f3a8c1...9d42\n\nRecompute:\n  MAC_calc = HMAC-SHA256(<span class='warn'>K</span>,\n    DeviceID+Counter+Timestamp)\n           = <span class='ok'>f3a8c1...9d42</span>",
+      note:"RX locally recomputes the MAC using its stored K. No network call needed — fully offline verification in microseconds."
+    },
+    right:{label:"Three validation checks",
+      code:"1. MAC_recv == MAC_calc ?  <span class='ok'>YES ✓</span>\n2. Counter > Counter_RX ?  <span class='ok'>YES ✓</span>  (1 > 0)\n3. |now - Timestamp| < 5s ? <span class='ok'>YES ✓</span>\n\nResult: <span class='ok'>BEACON ACCEPTED</span>\nCounter_RX updated → <span class='hi'>1</span>\nHorn suppression: <span class='ok'>ARMED</span>",
+      note:"All three must pass. Fail any one → beacon dropped silently. No error response is sent, so the attacker gets no feedback to guide guessing."
+    },
+    insight:{type:"cc-success",icon:"✅",text:"A foreign device broadcasting on the same LoRa frequency fails check 1 immediately — it cannot produce a valid MAC without K."}
+  },
+  {
+    title:"Why same-frequency spoofing fails",
+    who:"lock", badge:"cc-badge-lock", whoLabel:"Attack resistance", step:"Stage 4 of 6",
+    left:{label:"Attacker tries to spoof",
+      code:"Attacker broadcasts:\n  DeviceID = TX-9A3F-K72  (copied)\n  Counter  = 99\n  Timestamp= &lt;now&gt;\n  MAC      = <span class='bad'>RANDOM / GUESSED</span>\n\nRX checks:\n  MAC_recv != MAC_calc  <span class='bad'>FAIL ✗</span>\n\nResult: <span class='bad'>DROPPED — no effect</span>",
+      note:"Without K, forging a valid MAC requires breaking HMAC-SHA256. That is a 2²⁵⁶ brute-force problem — infeasible in any realistic scenario."
+    },
+    right:{label:"Replay attack also fails",
+      code:"Attacker re-sends a captured\nlegitimate packet:\n  Counter  = 1  (old)\n  Timestamp= 1711023847  (old)\n  MAC      = f3a8c1...9d42  (real!)\n\nRX checks:\n  Counter 1 &gt; Counter_RX 5 ?  <span class='bad'>NO ✗</span>\n  |now - old_ts| &lt; 5 s ?      <span class='bad'>NO ✗</span>\n\nResult: <span class='bad'>DROPPED — replay blocked</span>",
+      note:"Even a perfectly valid captured packet becomes useless immediately. The monotonic counter and 5-second timestamp window close both replay vectors."
+    },
+    insight:{type:"cc-danger",icon:"🛡",text:"LoRa frequency is public. K is private. Controlling the frequency buys an attacker nothing — they still cannot forge an HMAC without knowing K."}
+  },
+  {
+    title:"Counter increment — tamper-evident chain",
+    who:"both", badge:"cc-badge-both", whoLabel:"TX + RX in sync", step:"Stage 5 of 6",
+    left:{label:"Counter progression (TX)",
+      code:"Beacon 1:  Counter=<span class='hi'>1</span>  MAC=f3a8c1...\nBeacon 2:  Counter=<span class='hi'>2</span>  MAC=7c3d90...\nBeacon 3:  Counter=<span class='hi'>3</span>  MAC=b12ef4...\n...\nBeacon N:  Counter=<span class='hi'>N</span>  MAC=&lt;unique&gt;",
+      note:"Each beacon gets a unique MAC because the counter input changes every time. No two beacons are ever identical — even a millisecond apart."
+    },
+    right:{label:"Ledger entry per interaction",
+      code:"{  event:     \"horn_suppressed\",\n   tx_id:     \"TX-9A3F-K72\",\n   rx_id:     \"RX-2B7C-P14\",\n   counter:   <span class='hi'>3</span>,\n   timestamp: 1711023852,\n   mac:       \"b12ef4...\",\n   prev_hash: \"9a3f...\"  }",
+      note:"Each entry chains to the previous via prev_hash — like a blockchain. Editing any earlier record breaks the hash of every subsequent entry."
+    },
+    insight:{type:"",icon:"🔗",text:"The hash chain means no one — not even SONET operators — can silently edit or delete past records. Any tampering is immediately detectable."}
+  },
+  {
+    title:"Why this uniquely solves the problem",
+    who:"both", badge:"cc-badge-both", whoLabel:"System guarantee", step:"Stage 6 of 6",
+    full:true,
+    rows:[
+      {label:"Uncloneable identity",   val:"K burned in hardware — never on air",  w:"92%", color:"#1D9E75"},
+      {label:"Replay-proof",           val:"Monotonic counter + 5 s window",        w:"88%", color:"#378ADD"},
+      {label:"Spoof-proof",            val:"HMAC-SHA256 needs K to forge",          w:"98%", color:"#7F77DD"},
+      {label:"Tamper-evident log",     val:"Hash-chained ledger per event",         w:"95%", color:"#BA7517"},
+      {label:"Frequency independence", val:"Same LoRa channel — different K → fail",w:"100%",color:"#639922"},
+    ],
+    insight:{type:"cc-success",icon:"🏆",text:"Two devices sharing the same LoRa frequency cannot activate each other's horn suppression. Proof: they hold different K values, so every MAC cross-check fails. The security is mathematically isolated per paired device set — frequency is irrelevant."}
+  }
+];
+
+var cur=0;
+
+function render(){
+  var s=S[cur];
+  var pips=document.getElementById('cc-pips');
+  pips.innerHTML=S.map(function(_,i){
+    var cls=i<cur?'done':i===cur?'active':'';
+    return '<div class="cc-pip '+cls+'" onclick="ccJump('+i+')"></div>';
+  }).join('');
+
+  var body='';
+  if(s.full){
+    body='<div class="cc-full">'
+      +s.rows.map(function(r){
+        return '<div class="cc-anim-row">'
+          +'<span class="cc-anim-label">'+r.label+'</span>'
+          +'<div class="cc-anim-bar"><div class="cc-anim-fill" style="--w:'+r.w+';background:'+r.color+'"></div></div>'
+          +'<span class="cc-anim-val">'+r.val+'</span>'
+          +'</div>';
+      }).join('')
+      +'<div class="cc-insight '+s.insight.type+'" style="margin-top:14px">'
+      +'<span class="cc-icon">'+s.insight.icon+'</span>'
+      +'<span>'+s.insight.text+'</span>'
+      +'</div>'
+      +'</div>';
+  } else {
+    body='<div class="cc-body">'
+      +'<div class="cc-col">'
+      +'<div class="cc-col-label">'+s.left.label+'</div>'
+      +'<div class="cc-mono">'+s.left.code+'</div>'
+      +'<p class="cc-note">'+s.left.note+'</p>'
+      +'</div>'
+      +'<div class="cc-col">'
+      +'<div class="cc-col-label">'+s.right.label+'</div>'
+      +'<div class="cc-mono">'+s.right.code+'</div>'
+      +'<p class="cc-note">'+s.right.note+'</p>'
+      +'</div>'
+      +'</div>'
+      +'<div class="cc-insight-wrap">'
+      +'<div class="cc-insight '+s.insight.type+'">'
+      +'<span class="cc-icon">'+s.insight.icon+'</span>'
+      +'<span>'+s.insight.text+'</span>'
+      +'</div></div>';
+  }
+
+  document.getElementById('cc-stage').innerHTML=
+    '<div class="cc-stage">'
+    +'<div class="cc-stage-header">'
+    +'<span class="cc-badge '+s.badge+'">'+s.whoLabel+'</span>'
+    +'<span class="cc-stage-title">'+s.title+'</span>'
+    +'<span class="cc-step-label">'+s.step+'</span>'
+    +'</div>'
+    +body
+    +'</div>';
+
+  document.getElementById('cc-nav-info').textContent=(cur+1)+' / '+S.length;
+}
+
+window.ccMove=function(d){ cur=Math.max(0,Math.min(S.length-1,cur+d)); render(); };
+window.ccJump=function(i){ cur=i; render(); };
+render();
+})();
+
+
+
+
+
+(function(){
+ 
+var mkr = function(id, color){
+  return '<marker id="'+id+'" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">'
+    +'<path d="M2 1L8 5L2 9" fill="none" stroke="'+color+'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>'
+    +'</marker>';
+};
+ 
+var VIEWS = [
+ 
+/* ── 0: KEY PAIRING ── */
+'<svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg"><defs>'
++mkr('m0g','#1D9E75')+mkr('m0b','#378ADD')
++'</defs>'
+ 
+// TX box
++'<g class="cc-rise">'
++'<rect x="40" y="55" width="182" height="228" rx="14" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="131" y="84" text-anchor="middle" font-family="Poppins,sans-serif" font-size="13" font-weight="600" fill="#27500A">TX unit — X915</text>'
++'<rect x="58" y="96" width="146" height="26" rx="6" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="131" y="113" text-anchor="middle" font-family="Courier New,monospace" font-size="10" fill="#27500A">ID: TX-9A3F-K72</text>'
++'<rect x="58" y="130" width="146" height="50" rx="6" fill="#27500A" stroke="#173404" stroke-width="0.5"/>'
++'<text x="131" y="152" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#C0DD97">Secret Key K</text>'
++'<text x="131" y="170" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#9FE1CB">a9f3c8...1de72b</text>'
++'<rect x="58" y="190" width="146" height="26" rx="6" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="131" y="207" text-anchor="middle" font-family="Courier New,monospace" font-size="10" fill="#27500A">Counter: 0</text>'
++'<circle cx="131" cy="244" r="5" fill="#639922" class="cc-pu-g"/>'
++'<text x="131" y="264" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#3B6D11">Burned at factory</text>'
++'</g>'
+ 
+// RX box
++'<g class="cc-rise" style="animation-delay:.18s">'
++'<rect x="458" y="55" width="182" height="228" rx="14" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>'
++'<text x="549" y="84" text-anchor="middle" font-family="Poppins,sans-serif" font-size="13" font-weight="600" fill="#042C53">RX unit — V420</text>'
++'<rect x="476" y="96" width="146" height="26" rx="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>'
++'<text x="549" y="113" text-anchor="middle" font-family="Courier New,monospace" font-size="10" fill="#042C53">ID: RX-2B7C-P14</text>'
++'<rect x="476" y="130" width="146" height="50" rx="6" fill="#0C447C" stroke="#042C53" stroke-width="0.5"/>'
++'<text x="549" y="152" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#B5D4F4">Secret Key K</text>'
++'<text x="549" y="170" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#85B7EB">a9f3c8...1de72b</text>'
++'<rect x="476" y="190" width="146" height="26" rx="6" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>'
++'<text x="549" y="207" text-anchor="middle" font-family="Courier New,monospace" font-size="10" fill="#042C53">Counter: 0</text>'
++'<circle cx="549" cy="244" r="5" fill="#378ADD" class="cc-pu-b"/>'
++'<text x="549" y="264" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#185FA5">Burned at factory</text>'
++'</g>'
+ 
+// Factory bridge
++'<rect x="254" y="124" width="172" height="82" rx="10" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>'
++'<text x="340" y="150" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#2C2C2A">SONET factory</text>'
++'<text x="340" y="169" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#5F5E5A">K provisioned once,</text>'
++'<text x="340" y="185" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#5F5E5A">pair registered</text>'
++'<path d="M222 165 L252 165" class="cc-fl-g" marker-end="url(#m0g)"/>'
++'<path d="M426 165 L456 165" class="cc-fl-b" style="animation-delay:.3s" marker-end="url(#m0b)"/>'
+ 
+// K never on air
++'<rect x="214" y="300" width="252" height="28" rx="8" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>'
++'<text x="340" y="318" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#791F1F">K is never transmitted over LoRa</text>'
++'</svg>',
+ 
+/* ── 1: TX BEACON ── */
+'<svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg"><defs>'
++mkr('m1g','#1D9E75')
++'</defs>'
+// TX unit
++'<rect x="30" y="30" width="148" height="282" rx="12" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="104" y="56" text-anchor="middle" font-family="Poppins,sans-serif" font-size="12" font-weight="600" fill="#27500A">TX unit</text>'
++'<circle cx="104" cy="70" r="5" fill="#639922" class="cc-pu-g"/>'
++'<rect x="44" y="84" width="120" height="22" rx="5" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="104" y="99" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#173404">Counter += 1  →  7</text>'
++'<rect x="44" y="114" width="120" height="22" rx="5" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="104" y="129" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#173404">Timestamp: now</text>'
++'<rect x="44" y="144" width="120" height="42" rx="5" fill="#27500A" stroke="#173404" stroke-width="0.5"/>'
++'<text x="104" y="162" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="#C0DD97">HMAC-SHA256(K,</text>'
++'<text x="104" y="178" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="#9FE1CB">ID + Counter + Time)</text>'
++'<rect x="44" y="196" width="120" height="22" rx="5" fill="#639922" stroke="#173404" stroke-width="0.5"/>'
++'<text x="104" y="211" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#EAF3DE">MAC = f3a8c1..9d42</text>'
++'<text x="104" y="250" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="#3B6D11">K stays inside TX</text>'
++'<text x="104" y="264" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="#3B6D11">— never broadcast</text>'
+// Packet
++'<rect x="220" y="50" width="202" height="198" rx="12" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>'
++'<text x="321" y="76" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#2C2C2A">LoRa packet (public)</text>'
++'<rect x="232" y="86" width="178" height="22" rx="5" fill="#D3D1C7" stroke="#B4B2A9" stroke-width="0.5"/>'
++'<text x="321" y="101" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#2C2C2A">DeviceID: TX-9A3F-K72</text>'
++'<rect x="232" y="114" width="178" height="22" rx="5" fill="#D3D1C7" stroke="#B4B2A9" stroke-width="0.5"/>'
++'<text x="321" y="129" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#2C2C2A">Counter: 7</text>'
++'<rect x="232" y="142" width="178" height="22" rx="5" fill="#D3D1C7" stroke="#B4B2A9" stroke-width="0.5"/>'
++'<text x="321" y="157" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#2C2C2A">Timestamp: 17110238</text>'
++'<rect x="232" y="170" width="178" height="22" rx="5" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="321" y="185" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#173404">MAC: f3a8c1...9d42</text>'
++'<rect x="232" y="198" width="178" height="38" rx="5" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>'
++'<text x="321" y="213" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#791F1F">K: ████ NOT HERE ████</text>'
++'<text x="321" y="228" text-anchor="middle" font-family="Poppins,sans-serif" font-size="8" fill="#A32D2D">K cannot be derived from MAC</text>'
+// Arrows
++'<path d="M178 160 L218 160" class="cc-fl-g" marker-end="url(#m1g)"/>'
++'<path d="M422 160 L476 160" class="cc-fl-g" style="animation-delay:.2s" marker-end="url(#m1g)"/>'
+// Right note
++'<rect x="478" y="78" width="170" height="170" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>'
++'<text x="563" y="102" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#26215C">Any LoRa scanner</text>'
++'<text x="563" y="118" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#26215C">sees this packet.</text>'
++'<text x="563" y="142" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#3C3489">But K is absent.</text>'
++'<text x="563" y="160" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#3C3489">HMAC is a one-way</text>'
++'<text x="563" y="176" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#3C3489">function — cannot</text>'
++'<text x="563" y="192" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#3C3489">reverse to find K.</text>'
++'<rect x="490" y="208" width="146" height="28" rx="7" fill="#534AB7" stroke="#3C3489" stroke-width="0.5"/>'
++'<text x="563" y="226" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" font-weight="600" fill="#EEEDFE">Listening = useless</text>'
+// Timestamp note
++'<rect x="220" y="264" width="202" height="54" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>'
++'<text x="321" y="284" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#412402">Timestamp window: 5 seconds</text>'
++'<text x="321" y="300" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#633806">Replaying old packet: instantly rejected</text>'
++'</svg>',
+ 
+/* ── 2: RX VERIFY ── */
+'<svg viewBox="0 0 680 360" xmlns="http://www.w3.org/2000/svg"><defs>'
++mkr('m2g','#1D9E75')+mkr('m2b','#378ADD')
++'</defs>'
+// Incoming
++'<rect x="28" y="38" width="156" height="136" rx="10" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>'
++'<text x="106" y="60" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#2C2C2A">Received packet</text>'
++'<rect x="40" y="68" width="132" height="18" rx="4" fill="#D3D1C7" stroke="#B4B2A9" stroke-width="0.5"/>'
++'<text x="106" y="80" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#2C2C2A">ID: TX-9A3F-K72</text>'
++'<rect x="40" y="92" width="132" height="18" rx="4" fill="#D3D1C7" stroke="#B4B2A9" stroke-width="0.5"/>'
++'<text x="106" y="104" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#2C2C2A">Counter: 7</text>'
++'<rect x="40" y="116" width="132" height="18" rx="4" fill="#D3D1C7" stroke="#B4B2A9" stroke-width="0.5"/>'
++'<text x="106" y="128" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#2C2C2A">Time: 17110238</text>'
++'<rect x="40" y="140" width="132" height="18" rx="4" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="106" y="152" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#173404">MAC: f3a8c1..9d42</text>'
++'<path d="M184 106 L246 106" class="cc-fl-b" marker-end="url(#m2b)"/>'
+// RX unit
++'<rect x="246" y="28" width="190" height="238" rx="12" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>'
++'<text x="341" y="54" text-anchor="middle" font-family="Poppins,sans-serif" font-size="12" font-weight="600" fill="#042C53">RX verifies</text>'
++'<rect x="260" y="64" width="162" height="40" rx="7" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>'
++'<text x="341" y="81" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="#042C53">Recompute with own K:</text>'
++'<text x="341" y="97" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#0C447C">HMAC(K, ID+7+time)</text>'
++'<rect x="260" y="114" width="162" height="26" rx="7" fill="#0C447C" stroke="#042C53" stroke-width="0.5"/>'
++'<text x="341" y="131" text-anchor="middle" font-family="Courier New,monospace" font-size="10" font-weight="600" fill="#E6F1FB">= f3a8c1...9d42 ✓</text>'
++'<rect x="260" y="150" width="162" height="22" rx="6" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="341" y="165" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#173404">Check 1: MAC match ✓</text>'
++'<rect x="260" y="178" width="162" height="22" rx="6" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="341" y="193" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#173404">Check 2: Counter 7 &gt; 6 ✓</text>'
++'<rect x="260" y="206" width="162" height="22" rx="6" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="341" y="221" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#173404">Check 3: timestamp fresh ✓</text>'
++'<text x="341" y="252" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#3B6D11">All 3 pass → ACCEPTED</text>'
++'<path d="M436 150 L496 150" class="cc-fl-g" marker-end="url(#m2g)"/>'
+// Outcome
++'<rect x="496" y="58" width="156" height="208" rx="12" fill="#EAF3DE" stroke="#1D9E75" stroke-width="0.5"/>'
++'<text x="574" y="84" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#27500A">Outcome</text>'
++'<rect x="510" y="94" width="128" height="30" rx="7" fill="#639922" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="574" y="113" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#EAF3DE">Horn SUPPRESSED</text>'
++'<rect x="510" y="132" width="128" height="22" rx="6" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="574" y="147" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#173404">Counter_RX → 7</text>'
++'<rect x="510" y="160" width="128" height="22" rx="6" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="574" y="175" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#173404">Event logged</text>'
++'<rect x="510" y="188" width="128" height="22" rx="6" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="574" y="203" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#173404">Fully offline</text>'
++'<text x="574" y="244" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="#3B6D11">No cloud needed</text>'
+// Fail note
++'<rect x="246" y="284" width="190" height="56" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>'
++'<text x="341" y="305" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#412402">Fail any one of the 3 checks:</text>'
++'<text x="341" y="322" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#633806">packet dropped silently. No error sent.</text>'
++'</svg>',
+ 
+/* ── 3: SPOOF FAILS ── */
+'<svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg"><defs>'
++mkr('m3r','#A32D2D')+mkr('m3b','#888780')
++'</defs>'
+// Attacker
++'<rect x="28" y="28" width="182" height="282" rx="12" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>'
++'<text x="119" y="56" text-anchor="middle" font-family="Poppins,sans-serif" font-size="12" font-weight="600" fill="#501313">Attacker on same</text>'
++'<text x="119" y="72" text-anchor="middle" font-family="Poppins,sans-serif" font-size="12" font-weight="600" fill="#501313">LoRa frequency</text>'
++'<text x="119" y="98" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#791F1F">Tries to broadcast:</text>'
++'<rect x="42" y="106" width="152" height="20" rx="4" fill="#F7C1C1" stroke="#E24B4A" stroke-width="0.5"/>'
++'<text x="118" y="119" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#501313">ID: TX-9A3F-K72 ✓ (copied)</text>'
++'<rect x="42" y="132" width="152" height="20" rx="4" fill="#F7C1C1" stroke="#E24B4A" stroke-width="0.5"/>'
++'<text x="118" y="145" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#501313">Counter: 99 (fake high)</text>'
++'<rect x="42" y="158" width="152" height="20" rx="4" fill="#F7C1C1" stroke="#E24B4A" stroke-width="0.5"/>'
++'<text x="118" y="171" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#501313">Timestamp: now</text>'
++'<rect x="42" y="184" width="152" height="28" rx="4" fill="#E24B4A" stroke="#A32D2D" stroke-width="0.5" class="cc-bad"/>'
++'<text x="118" y="201" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#FCEBEB">MAC: ??? GUESSED/RANDOM</text>'
++'<text x="119" y="238" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="#791F1F">No K → cannot compute</text>'
++'<text x="119" y="254" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="#791F1F">valid MAC.</text>'
++'<text x="119" y="270" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="#A32D2D">2²⁵⁶ guesses needed.</text>'
++'<text x="119" y="286" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="#A32D2D">Infeasible forever.</text>'
++'<path d="M210 188 L272 188" class="cc-fl-r" marker-end="url(#m3r)"/>'
+// RX rejection
++'<rect x="272" y="78" width="168" height="168" rx="12" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>'
++'<text x="356" y="104" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#042C53">RX checks</text>'
++'<rect x="286" y="112" width="140" height="22" rx="6" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>'
++'<text x="356" y="127" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#791F1F">MAC_recv ≠ MAC_calc ✗</text>'
++'<rect x="286" y="140" width="140" height="22" rx="6" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>'
++'<text x="356" y="155" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#5F5E5A">Check 2: not reached</text>'
++'<rect x="286" y="168" width="140" height="22" rx="6" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>'
++'<text x="356" y="183" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#5F5E5A">Check 3: not reached</text>'
++'<rect x="286" y="200" width="140" height="30" rx="7" fill="#E24B4A" stroke="#A32D2D" stroke-width="0.5"/>'
++'<text x="356" y="219" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#FCEBEB">DROPPED silently</text>'
+// Replay box
++'<rect x="272" y="264" width="168" height="56" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>'
++'<text x="356" y="283" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" font-weight="600" fill="#412402">Replay of real packet:</text>'
++'<text x="356" y="300" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#633806">Old counter ✗  |  Old timestamp ✗</text>'
++'<text x="356" y="314" text-anchor="middle" font-family="Poppins,sans-serif" font-size="9" fill="#854F0B">Both gates must pass → neither does</text>'
+// Right explanation
++'<rect x="460" y="78" width="192" height="242" rx="12" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>'
++'<text x="556" y="106" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#2C2C2A">Frequency ≠ power</text>'
++'<line x1="474" y1="114" x2="638" y2="114" stroke="#D3D1C7" stroke-width="0.5"/>'
++'<text x="556" y="134" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#5F5E5A">LoRa 915 MHz is public.</text>'
++'<text x="556" y="152" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#5F5E5A">Any SDR radio can</text>'
++'<text x="556" y="168" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#5F5E5A">broadcast on it.</text>'
++'<text x="556" y="194" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#2C2C2A">Security is in K,</text>'
++'<text x="556" y="210" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#2C2C2A">not the channel.</text>'
++'<text x="556" y="236" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#2C2C2A">Different TX/RX pair</text>'
++'<text x="556" y="252" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#2C2C2A">= different K</text>'
++'<rect x="474" y="264" width="164" height="28" rx="7" fill="#E24B4A" stroke="#A32D2D" stroke-width="0.5"/>'
++'<text x="556" y="282" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" font-weight="600" fill="#FCEBEB">Cross-trigger: impossible</text>'
++'</svg>',
+ 
+/* ── 4: HASH CHAIN ── */
+'<svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg"><defs>'
++mkr('m4g','#1D9E75')+mkr('m4r','#A32D2D')
++'</defs>'
++'<text x="340" y="26" text-anchor="middle" font-family="Poppins,sans-serif" font-size="12" font-weight="600" fill="#2C2C2A">Every TX-RX interaction chains into a tamper-evident ledger</text>'
+// Block 1
++'<rect x="28" y="44" width="150" height="148" rx="10" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>'
++'<rect x="28" y="44" width="150" height="28" rx="10" fill="#3B6D11"/>'
++'<rect x="28" y="62" width="150" height="10" rx="0" fill="#3B6D11"/>'
++'<text x="103" y="64" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#EAF3DE">Block #1</text>'
++'<text x="103" y="96" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#27500A">tx: TX-9A3F</text>'
++'<text x="103" y="112" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#27500A">counter: 1</text>'
++'<text x="103" y="128" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#27500A">mac: f3a8c1</text>'
++'<text x="103" y="144" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#27500A">event: suppress</text>'
++'<text x="103" y="160" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#27500A">prev: genesis</text>'
++'<rect x="40" y="172" width="126" height="16" rx="4" fill="#639922" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="103" y="184" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#EAF3DE">hash: 9a3f2c...</text>'
+// Arrow 1→2
++'<path d="M178 118 L218 118" fill="none" stroke="#1D9E75" stroke-width="2" stroke-dasharray="6 4" class="cc-chain" marker-end="url(#m4g)"/>'
+// Block 2
++'<rect x="218" y="44" width="150" height="148" rx="10" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>'
++'<rect x="218" y="44" width="150" height="28" rx="10" fill="#3B6D11"/>'
++'<rect x="218" y="62" width="150" height="10" rx="0" fill="#3B6D11"/>'
++'<text x="293" y="64" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#EAF3DE">Block #2</text>'
++'<text x="293" y="96" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#27500A">prev: 9a3f2c...</text>'
++'<text x="293" y="112" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#27500A">counter: 2</text>'
++'<text x="293" y="128" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#27500A">mac: 7c3d90</text>'
++'<text x="293" y="144" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#27500A">event: suppress</text>'
++'<text x="293" y="160" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#27500A">ts: 17110241</text>'
++'<rect x="230" y="172" width="126" height="16" rx="4" fill="#639922" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="293" y="184" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#EAF3DE">hash: b12ef4...</text>'
+// Arrow 2→3
++'<path d="M368 118 L408 118" fill="none" stroke="#1D9E75" stroke-width="2" stroke-dasharray="6 4" class="cc-chain" style="animation-delay:.35s" marker-end="url(#m4g)"/>'
+// Block 3
++'<rect x="408" y="44" width="150" height="148" rx="10" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>'
++'<rect x="408" y="44" width="150" height="28" rx="10" fill="#3B6D11"/>'
++'<rect x="408" y="62" width="150" height="10" rx="0" fill="#3B6D11"/>'
++'<text x="483" y="64" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#EAF3DE">Block #3</text>'
++'<text x="483" y="96" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#27500A">prev: b12ef4...</text>'
++'<text x="483" y="112" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#27500A">counter: 3</text>'
++'<text x="483" y="128" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#27500A">mac: d84a1c</text>'
++'<text x="483" y="144" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#27500A">event: zone_pass</text>'
++'<text x="483" y="160" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#27500A">ts: 17110299</text>'
++'<rect x="420" y="172" width="126" height="16" rx="4" fill="#639922" stroke="#3B6D11" stroke-width="0.5"/>'
++'<text x="483" y="184" text-anchor="middle" font-family="Courier New,monospace" font-size="9" fill="#EAF3DE">hash: 4e7c91...</text>'
+// dots
++'<circle cx="574" cy="118" r="4" fill="#1D9E75"/>'
++'<circle cx="586" cy="118" r="4" fill="#1D9E75" opacity=".55"/>'
++'<circle cx="598" cy="118" r="4" fill="#1D9E75" opacity=".25"/>'
+// Tamper note
++'<rect x="28" y="216" width="622" height="100" rx="12" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>'
++'<text x="339" y="242" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#501313">Tamper attempt on Block #1</text>'
++'<text x="339" y="264" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#791F1F">Changing any field changes Block #1 hash → Block #2 prev_hash no longer matches → entire chain after it breaks</text>'
++'<rect x="168" y="278" width="342" height="26" rx="7" fill="#E24B4A" stroke="#A32D2D" stroke-width="0.5"/>'
++'<text x="339" y="295" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" font-weight="600" fill="#FCEBEB">No one can silently edit history — not even SONET</text>'
++'</svg>',
+ 
+/* ── 5: GUARANTEE ── */
+'<svg viewBox="0 0 680 360" xmlns="http://www.w3.org/2000/svg">'
++'<text x="340" y="26" text-anchor="middle" font-family="Poppins,sans-serif" font-size="12" font-weight="600" fill="#2C2C2A">Six properties that uniquely solve the problem</text>'
+// 1
++'<rect x="28" y="40" width="196" height="90" rx="10" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>'
++'<rect x="28" y="40" width="196" height="28" rx="10" fill="#3B6D11"/>'
++'<rect x="28" y="58" width="196" height="10" rx="0" fill="#3B6D11"/>'
++'<text x="126" y="60" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#EAF3DE">Unforgeable identity</text>'
++'<text x="126" y="90" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#27500A">K is hardware-bound.</text>'
++'<text x="126" y="106" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#27500A">Cannot be extracted or</text>'
++'<text x="126" y="120" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#3B6D11">cloned from a live device.</text>'
+// 2
++'<rect x="242" y="40" width="196" height="90" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>'
++'<rect x="242" y="40" width="196" height="28" rx="10" fill="#185FA5"/>'
++'<rect x="242" y="58" width="196" height="10" rx="0" fill="#185FA5"/>'
++'<text x="340" y="60" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#E6F1FB">Dual anti-replay</text>'
++'<text x="340" y="90" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#0C447C">Monotonic counter blocks</text>'
++'<text x="340" y="106" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#0C447C">old-packet replay. 5-second</text>'
++'<text x="340" y="120" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#185FA5">window blocks time-shift.</text>'
+// 3
++'<rect x="456" y="40" width="196" height="90" rx="10" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>'
++'<rect x="456" y="40" width="196" height="28" rx="10" fill="#854F0B"/>'
++'<rect x="456" y="58" width="196" height="10" rx="0" fill="#854F0B"/>'
++'<text x="554" y="60" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#FAEEDA">Tamper-evident log</text>'
++'<text x="554" y="90" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#633806">Hash-chained ledger.</text>'
++'<text x="554" y="106" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#633806">Edit any past record →</text>'
++'<text x="554" y="120" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#854F0B">all blocks after it break.</text>'
+// 4
++'<rect x="28" y="148" width="196" height="90" rx="10" fill="#FCEBEB" stroke="#A32D2D" stroke-width="0.5"/>'
++'<rect x="28" y="148" width="196" height="28" rx="10" fill="#A32D2D"/>'
++'<rect x="28" y="166" width="196" height="10" rx="0" fill="#A32D2D"/>'
++'<text x="126" y="168" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#FCEBEB">Frequency-agnostic</text>'
++'<text x="126" y="198" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#791F1F">Same LoRa channel,</text>'
++'<text x="126" y="214" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#791F1F">different K → zero effect.</text>'
++'<text x="126" y="228" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#A32D2D">Channel control = useless.</text>'
+// 5
++'<rect x="242" y="148" width="196" height="90" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>'
++'<rect x="242" y="148" width="196" height="28" rx="10" fill="#534AB7"/>'
++'<rect x="242" y="166" width="196" height="10" rx="0" fill="#534AB7"/>'
++'<text x="340" y="168" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#EEEDFE">Offline verification</text>'
++'<text x="340" y="198" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#3C3489">RX verifies entirely locally.</text>'
++'<text x="340" y="214" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#3C3489">No cloud, no internet,</text>'
++'<text x="340" y="228" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#534AB7">no single point of failure.</text>'
+// 6
++'<rect x="456" y="148" width="196" height="90" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>'
++'<rect x="456" y="148" width="196" height="28" rx="10" fill="#0F6E56"/>'
++'<rect x="456" y="166" width="196" height="10" rx="0" fill="#0F6E56"/>'
++'<text x="554" y="168" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" font-weight="600" fill="#E1F5EE">Provable audit trail</text>'
++'<text x="554" y="198" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#085041">Every event has counter</text>'
++'<text x="554" y="214" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#085041">+ MAC + hash proof.</text>'
++'<text x="554" y="228" text-anchor="middle" font-family="Poppins,sans-serif" font-size="10" fill="#0F6E56">Authorities can verify it.</text>'
+// Verdict
++'<rect x="28" y="256" width="624" height="82" rx="14" fill="#27500A" stroke="#173404" stroke-width="0.5"/>'
++'<text x="340" y="283" text-anchor="middle" font-family="Poppins,sans-serif" font-size="12" font-weight="600" fill="#C0DD97">The unique guarantee</text>'
++'<text x="340" y="305" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" fill="#9FE1CB">Two devices on the same LoRa frequency with different K values cannot interact with each other.</text>'
++'<text x="340" y="325" text-anchor="middle" font-family="Poppins,sans-serif" font-size="11" fill="#9FE1CB">Security is mathematically isolated per device pair — frequency is completely irrelevant.</text>'
++'</svg>'
+ 
+];
+ 
+var ccCur = 0;
+window.ccGo = function(n){
+  ccCur = n;
+  document.querySelectorAll('.cc-sbtn').forEach(function(b,i){ b.classList.toggle('on', i===n); });
+  document.getElementById('cc-canvas').innerHTML = VIEWS[n];
+};
+ccGo(0);
+ 
+})();
+
+
+
+
+
+
+
+</script>
+
+<br>
+<br>
+<br>
+<br>
+
+<h4>
+
+This Cryptographic counter technology has been incorporated in these TX and RX modules , so that it can't be misused by any others with same frequency of 867MHz. By this technique , no one can bypass the signal and control the horn system line . This ensures safety and avoids misusing the current technology. <br><br>For each TX and RX interference, the counter keeps the count of interactions it has made in both TX and RX.The transmitter combines: secret key, counter and the command and runs them through a cryptographic algorithm.
+This creates a unique encrypted code for every transmission. If a spoof module tries to interact with the same frequency ,the TX's crypto counter doesn't get matched with the current count and denies the request. Also , it doesn't add up space in the memory as it erases previous data in sometime.<br>
+
+
+
+</h4>
+
+
+<br>
+<br>
+<br>
+<br>
+    <!-- FOOTER (same as home) -->
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div class="footer-brand-block">
+          
+            <div class="logo">
+              <img src="logoT.png" class="logo-img">
+            <!-- <div class="logo-symbol"></div> -->
+            <div class="logo-text">
+              <span class="logo-text-main"></span>
+              <span class="logo-text-sub"></span>
+            </div>
+          </div>
+          <p class="footer-about" >
+            TX & RX systems, tuned for automating horn controls and smart-city developments.
+            </p>
+        </div>
+
+        <div class="footer-contact-block">
+          <h4>Contact</h4>
+          <a href="mailto:sharathmh2604@gmail.com" class="footer-contact-link">
+            <span class="icon">✉</span>
+            <span>sharathmh2604@gmail.com</span>
+          </a>
+          <a href="tel:+919740810578" class="footer-contact-link">
+            <span class="icon">📞</span>
+            <span>+91 97408 10578</span>
+          </a>
+        </div>
+
+        <div class="footer-links-block">
+          <h4>Navigate</h4>
+          <a href="sonet.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="contact.html">Contact</a>
+          <a href="transmitter.html">TX</a>
+          <a href="receiver.html">RX</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © <span class="brand">SONET</span> — For the better.
+      </div>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

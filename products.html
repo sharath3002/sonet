@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sonet – Products</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+    <link rel="manifest" href="assets/site.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <!-- HEADER -->
+    <header>
+      
+        <div class="logo">
+    <img src="logoT.png" class="logo-img">
+        <!-- <div class="logo-symbol"></div> -->
+          <div class="logo-text">
+          <span class="logo-text-main"></span>
+          <span class="logo-text-sub"></span>
+        </div> 
+      </div>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html"></a>
+        <a href="tech.html">TECH</a>
+        <a href="contact.html">Contact</a>
+        <button class="nav-cta" onclick="window.location.href='contact.html#contact-main'">
+          <span>Request demo</span>
+          <span class="icon">➜</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- PRODUCTS PAGE MAIN -->
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">SONET product line</h2>
+          <p class="section-sub">
+            Two core modules - a high-power Transmitter and in-vehicle Receiver ready for your vehicle and the environment 
+            setups.
+          </p>
+        </div>
+      </div>
+
+      <div class="product-frames-grid">
+        <!-- RX FRAME -->
+        <article class="product-frame-large tilt-card" data-tilt id="rx">
+          <div class="product-frame-header">
+            <span class="badge">Receiver</span>
+            <span class="product-code">RX</span>
+          </div>
+
+          <div class="product-frame-body">
+            <div class="product-frame-image">
+              <img src="assets/sonet-rx.png" class="frame-img" alt="Sonet RX Module" />
+              <!-- Replace background-image in CSS or with inline style when you have RX render -->
+              <div class="product-frame-image-glass"></div>
+            </div>
+            <div class="product-frame-content">
+              <a href="receiver.html" class="product1-link">SONET Vehicle Receiver ➜</a>
+              <p>
+                Compact RX module designed to sit inside vehicles. Tuned for noise rejection and
+                reliable LoRa-style links from the TX500, TX1000, TX1500 series transmitter.
+              </p>
+              <ul>
+                <li>Low-profile vehicle mounting</li>
+                <li>High immunity to interference</li>
+                <li>Optimized for zero latency</li>
+                
+              </ul>
+              <div class="product-price-block">
+  <span class="price in">₹1500 <br> In India</span>
+  <span class="price us">$55 <br> In USA</span>
+  <span class="price eu">€49 <br> In Europe</span>
+</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- TX FRAME -->
+        <article class="product-frame-large tilt-card" data-tilt id="tx">
+          <div class="product-frame-header">
+            <span class="badge">Transmitter</span>
+            <span class="product-code">TX500</span>
+          </div>
+
+          <div class="product-frame-body">
+            <div class="product-frame-image">
+              <img src="assets/sonet-tx.png" class="frame-img" alt="Sonet TX Module" />
+              <!-- Replace background-image in CSS or with inline style when you have TX render -->
+              <div class="product-frame-image-glass"></div>
+            </div>
+            <div class="product-frame-content">
+              
+              <a href="transmitter.html" class="product1-link">SONET Transmitter ➜</a>
+              <p>
+              TX module built for hard outdoor conditions with
+                configurable range profiles.It will be equipped with battery and placed inside a panel box.
+              </p>
+              <ul>
+                <li>Customizable LoRa range profiles</li>
+                <li>Extended battery backup variants</li>
+                <li>IP67-rated, solid enclosure with water-proofings</li>
+              </ul>
+              <div class="product-price-block">
+  <span class="price in">₹1600 <br> In India</span>
+  <span class="price us">$57 <br> In USA</span>
+  <span class="price eu">€50 <br> In Europe</span>
+</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- FOOTER (same as home) -->
+    <footer class="site-footer">
+      <div class="footer-top">
+        <div class="footer-brand-block">
+          
+            <div class="logo">
+              <img src="logoT.png" class="logo-img">
+            <!-- <div class="logo-symbol"></div> -->
+            <div class="logo-text">
+              <span class="logo-text-main"></span>
+              <span class="logo-text-sub"></span>
+            </div>
+          </div>
+          <p class="footer-about">
+            TX & RX systems, tuned for automating horn controls and smart-city developments.
+            
+          </p>
+        </div>
+
+        <div class="footer-contact-block">
+          <h4>Contact</h4>
+          <a href="mailto:sharathmh2604@gmail.com" class="footer-contact-link">
+            <span class="icon">✉</span>
+            <span>sharathmh2604@gmail.com</span>
+          </a>
+          <a href="tel:+919740810578" class="footer-contact-link">
+            <span class="icon">📞</span>
+            <span>+91 97408 10578</span>
+          </a>
+        </div>
+
+        <div class="footer-links-block">
+          <h4>Navigate</h4>
+          <a href="sonet.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="contact.html">Contact</a>
+          <a href="transmitter.html">TX</a>
+          <a href="receiver.html">RX</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © <span class="brand">SONET</span> — For the better.
+      </div>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sonet – Contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="shortcut icon" href="assets/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="assets/site.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- EmailJS — free, no server needed -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <style>
+    /* ── Button states ── */
+    .btn-primary { position: relative; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary.loading  { opacity: .7; pointer-events: none; }
+    .btn-primary.success  { background: radial-gradient(circle at top left,#6cff4d,#1D9E75) !important; box-shadow: 0 0 28px rgba(108,255,77,.6) !important; pointer-events: none; }
+    .btn-primary.errstate { background: radial-gradient(circle at top left,#ff4d6c,#8a0020) !important; box-shadow: 0 0 20px rgba(255,77,108,.5) !important; }
+
+    /* Spinner */
+    .btn-spinner { display:none; width:15px; height:15px; border:2px solid rgba(0,0,0,.3); border-top-color:#050608; border-radius:50%; animation:ejs-spin .7s linear infinite; flex-shrink:0; }
+    .btn-primary.loading .btn-spinner { display:block; }
+    @keyframes ejs-spin { to { transform:rotate(360deg); } }
+
+    /* Toast */
+    .ejs-toast-wrap {
+      position:fixed; top:22px; left:50%;
+      transform:translateX(-50%) translateY(-90px);
+      z-index:9999; opacity:0;
+      transition:transform .4s cubic-bezier(.34,1.56,.64,1), opacity .4s;
+      pointer-events:none;
+    }
+    .ejs-toast-wrap.show { transform:translateX(-50%) translateY(0); opacity:1; pointer-events:auto; }
+    .ejs-toast {
+      display:flex; align-items:center; gap:9px;
+      padding:11px 22px; border-radius:999px;
+      font-size:13px; font-weight:500; letter-spacing:.04em;
+      white-space:nowrap; backdrop-filter:blur(20px);
+      box-shadow:0 8px 30px rgba(0,0,0,.6);
+    }
+    .ejs-toast.ok  { background:rgba(8,70,34,.97); border:1px solid rgba(108,255,77,.4); color:#6cff4d; }
+    .ejs-toast.err { background:rgba(70,8,22,.97);  border:1px solid rgba(255,77,108,.4); color:#ff4d6c; }
+    .ejs-toast-ico { font-size:15px; }
+
+    /* Input focus glow */
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color:rgba(108,255,77,.7) !important;
+      box-shadow:0 0 0 3px rgba(108,255,77,.1) !important;
+      outline:none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Toast -->
+<div class="ejs-toast-wrap" id="ejsWrap">
+  <div class="ejs-toast" id="ejsToast">
+    <span class="ejs-toast-ico" id="ejsIco"></span>
+    <span id="ejsMsg"></span>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <img src="logoT.png" class="logo-img" alt="SONET">
+      <div class="logo"></div>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="tech.html">TECH</a>
+      <a href="contact.html"></a>
+      <button class="nav-cta" onclick="document.getElementById('contact-main').scrollIntoView({behavior:'smooth'})">
+        <span>Request demo</span>
+        <span class="icon">➜</span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- CONTACT MAIN -->
+  <section id="contact-main" class="section contact-page-main">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Talk to SONET</h2>
+        <p class="section-sub">
+          Share your use-case environment (workspace, schools, hospitals, tech-parks, bio-diversity sites) needs. We'll respond with a tailored TX recommendation.
+          
+        </p>
+      </div>
+    </div>
+
+    <div class="contact-page-grid">
+
+      <!-- Form — action/method removed; EmailJS handles sending -->
+      <form class="contact-form-card" id="contactForm" novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input id="company" name="company" type="text" placeholder="Company / Organization" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" placeholder="+    -           ..." />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="usecase">Use case</label>
+          <input id="usecase" name="usecase" type="text" placeholder="Vehicle installations, smart city developments, etc." />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Details</label>
+          <textarea id="message" name="message" rows="4"
+            placeholder="Tell us about the environment, terrain, range expectations, and any existing hardware."
+            required></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submitBtn">
+          <div class="btn-spinner"></div>
+          <span id="btnLabel">Send enquiry</span>
+          <span class="icon" id="btnIcon">➤</span>
+        </button>
+
+      </form>
+
+      <!-- Contact details -->
+      <div class="contact-details-card">
+        <h3>Direct contact</h3>
+        <p>You can also reach the SONET team directly via email or phone. We typically respond within three business days.</p>
+
+        <div class="contact-details-list">
+          <a href="mailto:sharathmh2604@gmail.com" class="contact-details-item">
+            <span class="icon">✉</span>
+            <div>
+              <div class="label">Email</div>
+              <div class="value">sharathmh2604@gmail.com</div>
+            </div>
+          </a>
+          <a href="tel:+919740810578" class="contact-details-item">
+            <span class="icon">📞</span>
+            <div>
+              <div class="label">Phone</div>
+              <div class="value">+91 97408 10578</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="contact-details-meta">
+          <div>
+            <div class="label">Office hours</div>
+            <div class="value">Mon – Fri, 9:00 AM – 6:00 PM IST</div>
+          </div>
+          <div>
+            <div class="label">Location</div>
+            <div class="value">Bengaluru, Karnataka, India</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand-block">
+        <div class="logo">
+          <img src="logoT.png" class="logo-img" alt="SONET">
+          <div class="logo-text">
+            <span class="logo-text-main"></span>
+            <span class="logo-text-sub"></span>
+          </div>
+        </div>
+        <p class="footer-about">
+          TX & RX systems, tuned for automating horn controls and smart-city developments.
+          
+        </p>
+      </div>
+      <div class="footer-contact-block">
+        <h4>Contact</h4>
+        <a href="mailto:sharathmh2604@gmail.com" class="footer-contact-link">
+          <span class="icon">✉</span>
+          <span>sharathmh2604@gmail.com</span>
+        </a>
+        <a href="tel:+919740810578" class="footer-contact-link">
+          <span class="icon">📞</span>
+          <span>+91 97408 10578</span>
+        </a>
+      </div>
+      <div class="footer-links-block">
+        <h4>Navigate</h4>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact</a>
+        <a href="transmitter.html">TX</a>
+        <a href="receiver.html">RX</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © <span class="brand">SONET</span> — For the better.
+    </div>
+  </footer>
+
+</div>
+
+<script src="main.js"></script>
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   ▸ STEP 1 — Sign up free at https://www.emailjs.com
+   ▸ STEP 2 — Add Gmail as Email Service → copy your SERVICE ID
+   ▸ STEP 3 — Create Template "sonet_notify"   (email to YOU)
+   ▸ STEP 4 — Create Template "sonet_autoreply" (email to USER)
+   ▸ STEP 5 — Replace the four values below
+   See the TEMPLATE GUIDE in the README that comes with this file.
+═══════════════════════════════════════════════════════════════ */
+
+const EJS_PUBLIC_KEY    = 'JQw5K4pZuzIaH1nbB';       // EmailJS → Account → API Keys
+const EJS_SERVICE_ID    = 'service_apo4xvc';       // EmailJS → Email Services
+const TPL_NOTIFY        = 'sonet_notify';          // your notification template ID
+const TPL_AUTOREPLY     = 'sonet_autoreply';       // auto-reply template ID
+
+emailjs.init({ publicKey: EJS_PUBLIC_KEY });
+
+/* ── Toast ── */
+let _tt;
+function toast(type, msg) {
+  const w = document.getElementById('ejsWrap');
+  const t = document.getElementById('ejsToast');
+  document.getElementById('ejsIco').textContent = type === 'ok' ? '✓' : '✕';
+  document.getElementById('ejsMsg').textContent = msg;
+  t.className = 'ejs-toast ' + type;
+  w.classList.add('show');
+  clearTimeout(_tt);
+  _tt = setTimeout(() => w.classList.remove('show'), 4500);
+}
+
+/* ── Submit ── */
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const btn   = document.getElementById('submitBtn');
+  const label = document.getElementById('btnLabel');
+  const ico   = document.getElementById('btnIcon');
+
+  const name    = document.getElementById('name').value.trim();
+  const company = document.getElementById('company').value.trim();
+  const email   = document.getElementById('email').value.trim();
+  const phone   = document.getElementById('phone').value.trim();
+  const usecase = document.getElementById('usecase').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  /* Validate */
+  if (!name || !email || !message) {
+    toast('err', 'Please fill in Name, Email and Details.');
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    toast('err', 'Please enter a valid email address.');
+    return;
+  }
+
+  /* Loading */
+  btn.classList.add('loading');
+  label.textContent = 'Sending…';
+  ico.style.display = 'none';
+
+  const ts = new Date().toLocaleString('en-IN', {
+    timeZone: 'Asia/Kolkata',
+    dateStyle: 'medium', timeStyle: 'short'
+  });
+
+  const vars = {
+    from_name:    name,
+    from_company: company || '—',
+    from_email:   email,
+    from_phone:   phone   || '—',
+    from_usecase: usecase || '—',
+    from_message: message,
+    reply_to:     email,
+    to_email:     email,        // used by auto-reply template
+    submitted_at: ts,
+  };
+
+  try {
+    /* 1 — Notify YOU */
+    await emailjs.send(EJS_SERVICE_ID, TPL_NOTIFY, vars);
+    /* 2 — Auto-reply to USER */
+    await emailjs.send(EJS_SERVICE_ID, TPL_AUTOREPLY, vars);
+
+    btn.classList.remove('loading');
+    btn.classList.add('success');
+    label.textContent = 'Sent!';
+    ico.textContent = '✓'; ico.style.display = 'inline';
+    toast('ok', 'Message received! A confirmation email is on its way to you.');
+    this.reset();
+
+    setTimeout(() => {
+      btn.classList.remove('success');
+      label.textContent = 'Send enquiry';
+      ico.textContent = '➤';
+    }, 5000);
+
+  } catch (err) {
+    console.error(err);
+    btn.classList.remove('loading');
+    btn.classList.add('errstate');
+    label.textContent = 'Failed — try again';
+    ico.style.display = 'inline';
+    toast('err', 'Could not send. Please email us directly at sharathmh2604@gmail.com');
+
+    setTimeout(() => {
+      btn.classList.remove('errstate');
+      label.textContent = 'Send enquiry';
+      ico.textContent = '➤';
+    }, 4000);
+  }
+});
+</script>
+</body>
+</html>

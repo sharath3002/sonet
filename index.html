@@ -1,0 +1,726 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    
+    <meta charset="UTF-8">
+    <title>SONET</title> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+    <link rel="manifest" href="assets/site.webmanifest" />
+
+  </head>
+  <body>
+    <div class="page">
+      <!-- HEADER -->
+      <header>
+        <div class="logo">
+  <img src="logoT.png" class="logo-img">
+  <div class="logo-text">
+            <!-- <span class="logo-text-main">SONET</span> -->
+            <!-- <span class="logo-text-sub">precision hardware</span> -->
+          </div>
+        </div>
+
+        <nav>
+          <!-- <a href="index.html">Home</a> -->
+          <a href="products.html">Products</a>
+          <a href="tech.html">TECH</a>
+          <a href="contact.html">Contact</a>
+          <button class="nav-cta" onclick="window.location.href='contact.html#contact-main'">
+            <span>Request demo</span>
+            <span class="icon">➜</span>
+          </button>
+        </nav>
+      </header>
+
+      <!-- HERO -->
+      <section id="hero" class="hero">
+        <!-- Left text -->
+        <div>
+          <div class="hero-tag">
+            <span class="hero-tag-dot"></span>
+            <span> hardware  ( semiconductor ) </span>
+          </div>
+
+          <h1 class="hero-title">
+            Hyper-realistic <span class="neon">SONET</span> modules<br />
+            engineered for the sound pollution.
+          </h1>
+
+          <p class="hero-sub">
+            SONET designs products which control the horn system of the vehicles and suppress the horn line until it passes the TX zone.
+            We mainly design TX and RX semiconductor embedded chips to communicate over RF signals.
+          </p>
+
+          <div class="hero-specs">
+            <div class="hero-spec-pill">
+              <span class="dot"></span>
+              <span>Long Range (LoRa) modules</span>
+            </div>
+            <div class="hero-spec-pill">
+              <span class="dot"></span>
+              <span>Cryptographic counters</span>
+            </div>
+            <div class="hero-spec-pill">
+              <span class="dot"></span>
+              <span> Works in 3 Transmitter Rangings</span>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <!-- See Products = go to products page -->
+            <a class="btn-primary" href="products.html">
+              <span>See products</span>
+              <span class="icon">▶</span>
+            </a>
+            <a class="btn-ghost" href="contact.html">
+              <span>Talk to our team</span>
+              <span class="icon">💬</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right hero 3D card -->
+        <div class="hero-3d-wrapper">
+          
+          <div class="hero-3d-card tilt-card" data-tilt>
+            <div class="hero-3d-highlight"></div>
+
+            <div class="hero-3d-top-row">
+              <img src="logoT.png" class="logo-img2">
+              <!-- <div class="hero-3d-chip">SONET</div> -->
+              <div class="hero-3d-status">
+                <span class="status-pulse"></span>
+                <span>867 MHz</span>
+              </div>
+            </div>
+
+            <div class="hero-3d-body">
+              <!-- Left text on card -->
+              <div class="hero-3d-main">
+                <div class="hero-3d-main-title">Transmitter TX1500</div>
+                <div class="hero-3d-main-sub">
+                  
+                  TX will be enclosed in a panel box and placed in high altitude poles in traffic sectors.
+                  &nbsp;
+                </div>
+
+                <div class="hero-3d-metrics">
+                  <div class="hero-3d-metric">
+                    <span class="label">Range</span>
+                    <span class="value">beyond 1.5 km</span>
+                  </div>
+                  <div class="hero-3d-metric">
+                    <span class="label">Battery</span>
+                    <span class="value">72 h backup</span>
+                  </div>
+                  <div class="hero-3d-metric">
+                    <span class="label">Enclosure</span>
+                    <span class="value">Rain proof</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right product photo slideshow (dark glass frame)
+              <div class="hero-3d-product">
+                <div class="product-photo-frame">
+                  <div class="product-photo-inner"> -->
+                    <!-- This layer will change image every 5 seconds via JS -->
+                    <!-- <div class="product-photo-layer"></div>
+                    <div class="product-photo-overlay"></div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="hero-3d-footer">
+              <span>Latency monitor: <strong>0.2 ms</strong></span><br>
+              <span>Profile: <strong>HORN Control system</strong></span>
+            </div>
+          </div>
+        </div>
+      </section>
+     
+
+
+
+  <section>
+        <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-dot"></div>
+      </div>
+    </section>
+
+
+
+  
+
+
+  <div class="toast" id="toast"></div>
+  <div class="horn-flash" id="hornFlash"></div>
+
+  <!-- ============ HERO SCENE ============ -->
+  <section class="hero" id="heroScene">
+
+    <!-- Stars -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Title -->
+    <div class="title-block">
+      <h1></h1>
+      <p>Smart Outdoor HORN Controlling Technology</p>
+    </div>
+
+    <!-- Ground line -->
+    <div class="ground-line"></div>
+    <div class="ground-glow"></div>
+
+    <!-- POLE + PANEL -->
+    <div class="pole-container" id="poleContainer">
+      <div class="panel-box" id="panelBox">
+        <div class="shield-pulse"></div>
+        <div class="panel-name">SONET</div>
+        <div class="panel-lights">
+          <div class="panel-light green"></div>
+          <div class="panel-light blue"></div>
+          <div class="panel-light red"></div>
+        </div>
+        <div class="toggle-wrap">
+          <span class="toggle-label">Control</span>
+          <button class="toggle-btn" id="toggleBtn" aria-label="Toggle horn control" onclick="toggleControl()"></button>
+          <span class="toggle-status" id="toggleStatus">OFF</span>
+        </div>
+      </div>
+      <div class="pole"></div>
+    </div>
+
+    <!-- CAR TRACK -->
+    <div class="car-track">
+      <div class="car-wrap" id="carWrap">
+        <!-- Sound waves -->
+        <div class="sound-waves" id="soundWaves">
+          <div class="wave-arc"></div>
+          <div class="wave-arc"></div>
+          <div class="wave-arc"></div>
+        </div>
+        <!-- Headlight glow -->
+        <div class="headlight-glow"></div>
+        <!-- Car SVG -->
+        <svg class="car-svg" viewBox="0 0 120 55" xmlns="http://www.w3.org/2000/svg">
+          <!-- Body shadow -->
+          <ellipse cx="60" cy="52" rx="45" ry="4" fill="rgba(0,0,0,0.35)" />
+          <!-- Wheels -->
+          <circle cx="30" cy="44" r="9" fill="#0a0f1a" stroke="#1e3050" stroke-width="1.5"/>
+          <circle cx="30" cy="44" r="5" fill="#1a2a3a" stroke="#2a4060" stroke-width="1"/>
+          <circle cx="30" cy="44" r="2" fill="#00cfff" opacity="0.6"/>
+          <circle cx="85" cy="44" r="9" fill="#0a0f1a" stroke="#1e3050" stroke-width="1.5"/>
+          <circle cx="85" cy="44" r="5" fill="#1a2a3a" stroke="#2a4060" stroke-width="1"/>
+          <circle cx="85" cy="44" r="2" fill="#00cfff" opacity="0.6"/>
+          <!-- Car body -->
+          <path d="M15 42 L15 30 Q16 22 28 20 L38 14 Q48 8 65 9 Q80 9 90 16 L100 22 Q108 26 108 34 L108 42 Z"
+                fill="url(#carGrad)" />
+          <!-- Windshield -->
+          <path d="M40 14 L40 26 L75 26 L73 11 Q65 9 55 9 Z" fill="url(#glassGrad)" opacity="0.7"/>
+          <!-- Roof window -->
+          <path d="M56 11 L57 26 L72 26 L71 12 Z" fill="rgba(0,180,255,0.15)"/>
+          <!-- Stripe -->
+          <path d="M15 33 L108 33" stroke="rgba(0,207,255,0.18)" stroke-width="1"/>
+          <!-- Headlights -->
+          <ellipse cx="107" cy="30" rx="4" ry="5" fill="url(#headlightGrad)" opacity="0.9"/>
+          <ellipse cx="107" cy="30" rx="2.5" ry="3" fill="#fff8c0"/>
+          <!-- Tail lights -->
+          <rect x="15" y="27" width="3" height="7" rx="1" fill="#ff3030" opacity="0.8"/>
+          <!-- Door lines -->
+          <line x1="58" y1="20" x2="58" y2="38" stroke="rgba(255,255,255,0.08)" stroke-width="0.8"/>
+          <!-- Gradient defs -->
+          <defs>
+            <linearGradient id="carGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#1a3050"/>
+              <stop offset="40%" stop-color="#0f2040"/>
+              <stop offset="100%" stop-color="#07101e"/>
+            </linearGradient>
+            <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00aaff" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="#003366" stop-opacity="0.3"/>
+            </linearGradient>
+            <radialGradient id="headlightGrad" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#fff7a0"/>
+              <stop offset="100%" stop-color="#ffcc00" stop-opacity="0.5"/>
+            </radialGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <!-- HORN BUTTON -->
+    <div class="horn-btn-wrap">
+      <span class="horn-label">HONK</span>
+      <button class="horn-btn" id="hornBtn" onmousedown="pressHorn()" onmouseup="releaseHorn()" ontouchstart="pressHorn()" ontouchend="releaseHorn()">
+        <div class="horn-blocked-ring"></div>
+        HORN
+      </button>
+    </div>
+
+  </section>
+
+  <!-- ============ INFO SECTION ============ -->
+  <section class="info-section">
+    <div class="section-header">
+      <h2>Why Horn Pollution Matters ?</h2>
+      <p>Understanding the invisible threat</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="card-icon">📊</div>
+        <div class="card-title">By the Numbers</div>
+        <div class="card-text">Noise above 85dB causes permanent hearing damage. City traffic horns regularly exceed 110dB — equivalent to a jackhammer at close range.</div>
+      </div>
+      <div class="info-card">
+        <div class="card-icon">🧠</div>
+        <div class="card-title">Health Impact</div>
+        <div class="card-text">Chronic exposure to horn pollution elevates cortisol, disrupts sleep cycles, and increases cardiovascular risk by up to 20% in urban residents.</div>
+      </div>
+      <div class="info-card">
+        <div class="card-icon">🛡️</div>
+        <div class="card-title">SONET Solution</div>
+        <div class="card-text">Smart acoustic dampening panels analyze, intercept, and cancel horn frequencies in real-time — protecting zones like hospitals, schools, and homes.</div>
+      </div>
+      <div class="info-card">
+        <div class="card-icon">🌐</div>
+        <div class="card-title">Network Effect</div>
+        <div class="card-text">Each SONET unit can cover upto kms and build a network in a metropolitan city.</div>
+      </div>
+    </div>
+  </section> 
+
+  <!-- ============ FOOTER ============ -->
+  <!-- <footer class="footer">
+    &copy; 2025 SONET — Smart Outdoor Noise &amp; Emission Technology &nbsp;|&nbsp; Silence is a right
+  </footer> -->
+
+  
+  
+
+      <!-- PRODUCTS PREVIEW (Gateway removed, only TX & RX) -->
+      <section id="products-preview" class="section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">SONET product line</h2>
+            <p class="section-sub">
+              SONET products are waiting to solve the problem of honking pollution. We designed it according to the requirements in today's global market.
+              
+            </p>
+          </div>
+          <a class="btn-ghost" href="products.html">
+            <span>See full products</span>
+            <span class="icon">↗</span>
+          </a>
+        </div>
+
+        <div class="product-grid">
+          <!-- Product 1: Transmitter -->
+          <article class="product-card tilt-card" data-tilt>
+            <div class="product-card-header">
+              <span class="badge">Transmitter</span>
+              <span class="product-code">TX1500</span>
+            </div>
+
+            <div class="product-visual">
+              <div class="product-visual-shadow"></div>
+              <div class="product-visual-plate">
+                <img src="assets/sonet-tx.png" alt="Sonet RX Module" class="product-img" />
+                <!-- <div class="product-visual-light"></div>
+                <div class="product-visual-text">Primary node</div> -->
+              </div>
+            </div>
+
+            <div class="product-meta">
+              <div class="product-name">SONET Transmitter</div>
+              <div class="product-rating">★ 4.9</div>
+            </div>
+
+            <div class="product-footer">
+              <span class="product-price">Beyond 1.5 km Long range</span>
+              <span class="product-cta">
+                Specs
+                <span class="icon">↗</span>
+              </span>
+            </div>
+          </article>
+
+          <!-- Product 2: Receiver -->
+          <article class="product-card tilt-card" data-tilt>
+            <div class="product-card-header">
+              <span class="badge">Receiver</span>
+              <span class="product-code">RX</span>
+            </div>
+
+            <div class="product-visual">
+              <div class="product-visual-shadow"></div>
+              <div class="product-visual-plate">
+                <img src="assets/sonet-rx.png" alt="Sonet RX Module" class="product-img" />
+                <!-- <div class="product-visual-light"></div>
+                <div class="product-visual-text">In-vehicle</div> -->
+              </div>
+            </div>
+
+            <div class="product-meta">
+              <div class="product-name">SONET Vehicle Receiver</div>
+              <div class="product-rating">★ 4.9</div>
+            </div>
+
+            <div class="product-footer">
+              <span class="product-price">Crypto counter enabled chips</span>
+              <span class="product-cta">
+                Specs
+                <span class="icon">↗</span>
+              </span>
+            </div>
+          </article>
+        </div>
+
+
+      </section>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+
+      <h2 class="flow-title">SONET SYSTEM WORKFLOW</h2>
+
+
+
+<section>
+  <div class="wrap">
+
+<div class="title-row">
+  <h2>SONET — TX zone + vehicle RX system</h2>
+</div>
+
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:#1D9E75"></div> TX zone (protected area)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#378ADD"></div> Vehicle with RX</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#BA7517"></div> Crypto counter event</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#A32D2D"></div> Horn blocked</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#5F5E5A"></div> Horn allowed</div>
+</div>
+
+<svg viewBox="0 0 680 900" width="100%">
+<defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <marker id="arr-w" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<!-- ═══════ ROW 1: TX TYPE SELECTOR ═══════ -->
+<text x="340" y="28" text-anchor="middle" font-size="13" font-weight="500" fill="#5F5E5A" font-family="var(--font-sans)">TX module type</text>
+
+<!-- TX 500m -->
+<g class="node-g" onclick="sendPrompt('Tell me more about the SONET TX 500m module')">
+  <rect x="40" y="38" width="140" height="58" rx="8" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+  <text x="110" y="60" text-anchor="middle" font-size="13" font-weight="500" fill="#27500A" font-family="var(--font-sans)">TX — 500 m</text>
+  <text x="110" y="78" text-anchor="middle" font-size="11" fill="#3B6D11" font-family="var(--font-sans)">LoRa short range</text>
+</g>
+
+<!-- TX 1km -->
+<g class="node-g" onclick="sendPrompt('Tell me more about the SONET TX 1km module')">
+  <rect x="270" y="38" width="140" height="58" rx="8" fill="#C0DD97" stroke="#3B6D11" stroke-width="0.5"/>
+  <text x="340" y="60" text-anchor="middle" font-size="13" font-weight="500" fill="#27500A" font-family="var(--font-sans)">TX — 1 km</text>
+  <text x="340" y="78" text-anchor="middle" font-size="11" fill="#27500A" font-family="var(--font-sans)">LoRa mid range</text>
+</g>
+
+<!-- TX 1km+ -->
+<g class="node-g" onclick="sendPrompt('Tell me more about the SONET TX long range module')">
+  <rect x="500" y="38" width="140" height="58" rx="8" fill="#639922" stroke="#3B6D11" stroke-width="0.5"/>
+  <text x="570" y="60" text-anchor="middle" font-size="13" font-weight="500" fill="#EAF3DE" font-family="var(--font-sans)">TX — 1 km+</text>
+  <text x="570" y="78" text-anchor="middle" font-size="11" fill="#C0DD97" font-family="var(--font-sans)">LoRa long range</text>
+</g>
+
+<!-- Arrows down from TX types -->
+<line x1="110" y1="96" x2="110" y2="126" class="flow-line flow-dash" stroke="#1D9E75" style="--spd:1.2s" marker-end="url(#arr)"/>
+<line x1="340" y1="96" x2="340" y2="126" class="flow-line flow-dash" stroke="#1D9E75" style="--spd:1.0s" marker-end="url(#arr)"/>
+<line x1="570" y1="96" x2="570" y2="126" class="flow-line flow-dash" stroke="#1D9E75" style="--spd:1.3s" marker-end="url(#arr)"/>
+
+<!-- ═══════ ROW 2: INSTALL LOCATIONS ═══════ -->
+<text x="340" y="146" text-anchor="middle" font-size="12" fill="#5F5E5A" font-family="var(--font-sans)">Installed at protected zones</text>
+
+<!-- School node -->
+<g class="node-g" onclick="sendPrompt('How does SONET work at a school?')">
+  <rect x="40" y="158" width="140" height="56" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+  <text x="110" y="181" text-anchor="middle" font-size="13" font-weight="500" fill="#0C447C" font-family="var(--font-sans)">School</text>
+  <text x="110" y="198" text-anchor="middle" font-size="11" fill="#185FA5" font-family="var(--font-sans)">Silence zone</text>
+</g>
+
+<!-- Hospital node -->
+<g class="node-g" onclick="sendPrompt('How does SONET work at a hospital?')">
+  <rect x="270" y="158" width="140" height="56" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+  <text x="340" y="181" text-anchor="middle" font-size="13" font-weight="500" fill="#0C447C" font-family="var(--font-sans)">Hospital</text>
+  <text x="340" y="198" text-anchor="middle" font-size="11" fill="#185FA5" font-family="var(--font-sans)">Critical quiet zone</text>
+</g>
+
+<!-- Traffic sector node -->
+<g class="node-g" onclick="sendPrompt('How does SONET work at traffic junctions?')">
+  <rect x="500" y="158" width="140" height="56" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+  <text x="570" y="181" text-anchor="middle" font-size="13" font-weight="500" fill="#0C447C" font-family="var(--font-sans)">Traffic sector</text>
+  <text x="570" y="198" text-anchor="middle" font-size="11" fill="#185FA5" font-family="var(--font-sans)">Junction zone</text>
+</g>
+
+<!-- Converge arrows to TX ZONE box -->
+<path d="M110 214 L110 256 L280 270" class="flow-line flow-dash" stroke="#1D9E75" style="--spd:1.6s" fill="none" marker-end="url(#arr)"/>
+<path d="M340 214 L340 270" class="flow-line flow-dash" stroke="#1D9E75" style="--spd:1.3s" fill="none" marker-end="url(#arr)"/>
+<path d="M570 214 L570 256 L400 270" class="flow-line flow-dash" stroke="#1D9E75" style="--spd:1.8s" fill="none" marker-end="url(#arr)"/>
+
+<!-- ═══════ ROW 3: TX ACTIVE ZONE (visual) ═══════ -->
+<!-- Pulse circles behind -->
+<circle cx="340" cy="340" r="115" fill="none" stroke="#1D9E75" stroke-width="1" opacity="0.14" class="tx-pulse" style="--r1:115px;--r2:125px;--ps:3s;--ox:340px;--oy:340px;"/>
+<circle cx="340" cy="340" r="95" fill="none" stroke="#1D9E75" stroke-width="1" opacity="0.18" class="tx-pulse" style="--r1:95px;--r2:105px;--ps:2.3s;--ox:340px;--oy:340px;animation-delay:0.6s;"/>
+
+<!-- TX Zone background circle -->
+<circle cx="340" cy="340" r="88" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5" opacity="0.5"/>
+
+<!-- TX unit box (center of zone) -->
+<g class="node-g" onclick="sendPrompt('What does the SONET TX unit do inside the zone?')">
+  <rect x="282" y="270" width="116" height="66" rx="10" fill="#1D9E75" stroke="#085041" stroke-width="0.5"/>
+  <text x="340" y="293" text-anchor="middle" font-size="13" font-weight="500" fill="#E1F5EE" font-family="var(--font-sans)">SONET TX unit</text>
+  <text x="340" y="311" text-anchor="middle" font-size="11" fill="#9FE1CB" font-family="var(--font-sans)">LoRa broadcast ON</text>
+  <text x="340" y="327" text-anchor="middle" font-size="10" fill="#9FE1CB" font-family="var(--font-sans)">Silence zone active</text>
+</g>
+
+<!-- Zone radius labels -->
+<text x="430" y="298" font-size="11" fill="#3B6D11" font-family="var(--font-sans)">Zone radius:</text>
+<text x="430" y="313" font-size="11" fill="#3B6D11" font-family="var(--font-sans)">500 m / 1 km / 1 km+</text>
+<line x1="398" y1="303" x2="428" y2="303" stroke="#3B6D11" stroke-width="0.5" stroke-dasharray="3 2"/>
+
+<!-- ═══════ ROW 4: VEHICLE APPROACH DECISION ═══════ -->
+<!-- Down arrow from TX zone -->
+<line x1="340" y1="410" x2="340" y2="448" class="flow-line flow-dash" stroke="#378ADD" style="--spd:1.1s" marker-end="url(#arr)"/>
+
+<!-- Decision diamond: vehicle with RX enters zone? -->
+<polygon points="340,450 430,490 340,530 250,490" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="340" y="484" text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C" font-family="var(--font-sans)">Vehicle with RX</text>
+<text x="340" y="500" text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C" font-family="var(--font-sans)">enters TX zone?</text>
+
+<!-- YES path (right) -->
+<path d="M430 490 L530 490" class="flow-line flow-dash" stroke="#378ADD" style="--spd:1.0s" fill="none" marker-end="url(#arr)"/>
+<text x="477" y="483" text-anchor="middle" font-size="11" fill="#378ADD" font-family="var(--font-sans)">YES</text>
+
+<!-- NO path (left) -->
+<path d="M250 490 L150 490" class="flow-line flow-dash" stroke="#5F5E5A" style="--spd:1.5s" fill="none" marker-end="url(#arr)"/>
+<text x="198" y="483" text-anchor="middle" font-size="11" fill="#5F5E5A" font-family="var(--font-sans)">NO</text>
+
+<!-- NO branch: outside zone, horn allowed -->
+<g class="node-g" onclick="sendPrompt('What happens when a vehicle is outside the SONET zone?')">
+  <rect x="50" y="462" width="140" height="56" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text x="120" y="485" text-anchor="middle" font-size="13" font-weight="500" fill="#2C2C2A" font-family="var(--font-sans)">Outside TX zone</text>
+  <text x="120" y="503" text-anchor="middle" font-size="11" fill="#5F5E5A" font-family="var(--font-sans)">Horn allowed</text>
+</g>
+<text x="120" y="530" text-anchor="middle" font-size="11" fill="#5F5E5A" font-family="var(--font-sans)">Normal operation</text>
+
+<!-- YES branch: RX receives LoRa signal -->
+<g class="node-g" onclick="sendPrompt('How does the RX unit receive the LoRa signal from TX?')">
+  <rect x="490" y="462" width="150" height="56" rx="8" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>
+  <text x="565" y="485" text-anchor="middle" font-size="13" font-weight="500" fill="#042C53" font-family="var(--font-sans)">RX receives</text>
+  <text x="565" y="503" text-anchor="middle" font-size="12" font-weight="500" fill="#042C53" font-family="var(--font-sans)">LoRa signal</text>
+</g>
+
+<!-- Down from RX receives -->
+<line x1="565" y1="518" x2="565" y2="556" class="flow-line flow-dash" stroke="#378ADD" style="--spd:0.9s" marker-end="url(#arr)"/>
+
+<!-- ═══════ ROW 5: HORN SUPPRESSION ═══════ -->
+<!-- Horn attempt decision -->
+<polygon points="565,558 640,590 565,622 490,590" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="565" y="584" text-anchor="middle" font-size="12" font-weight="500" fill="#4A1B0C" font-family="var(--font-sans)">Driver</text>
+<text x="565" y="600" text-anchor="middle" font-size="12" font-weight="500" fill="#4A1B0C" font-family="var(--font-sans)">presses horn?</text>
+
+<!-- YES horn pressed -->
+<line x1="565" y1="622" x2="565" y2="660" class="flow-line flow-dash" stroke="#D85A30" style="--spd:0.8s" marker-end="url(#arr)"/>
+<text x="578" y="644" font-size="11" fill="#D85A30" font-family="var(--font-sans)">YES</text>
+
+<!-- Horn blocked box -->
+<g class="node-g" onclick="sendPrompt('How does SONET block the horn signal?')">
+  <rect x="490" y="662" width="150" height="58" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+  <text x="565" y="686" text-anchor="middle" font-size="13" font-weight="500" fill="#4A1B0C" font-family="var(--font-sans)">Horn BLOCKED</text>
+  <text x="565" y="705" text-anchor="middle" font-size="11" fill="#993C1D" font-family="var(--font-sans)">RX suppresses signal</text>
+</g>
+
+<!-- NOT pressed -->
+<path d="M490 590 L420 590 L420 700 L488 700" class="flow-line flow-dash" stroke="#5F5E5A" style="--spd:1.6s" fill="none" marker-end="url(#arr)"/>
+<text x="453" y="640" text-anchor="middle" font-size="11" fill="#5F5E5A" font-family="var(--font-sans)">NO horn</text>
+<g class="node-g" onclick="sendPrompt('What happens when no horn is pressed inside the zone?')">
+  <rect x="330" y="672" width="140" height="56" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text x="400" y="695" text-anchor="middle" font-size="13" font-weight="500" fill="#2C2C2A" font-family="var(--font-sans)">Zone traversed</text>
+  <text x="400" y="713" text-anchor="middle" font-size="11" fill="#5F5E5A" font-family="var(--font-sans)">No event logged</text>
+</g>
+
+<!-- ═══════ ROW 6: CRYPTO COUNTER ═══════ -->
+<!-- Arrow from horn blocked to crypto -->
+<line x1="565" y1="720" x2="565" y2="760" class="flow-line flow-dash" stroke="#BA7517" style="--spd:0.7s" marker-end="url(#arr)"/>
+
+<!-- Crypto counter box -->
+<g class="node-g" onclick="sendPrompt('How does the SONET crypto counter work?')">
+  <rect x="460" y="762" width="210" height="72" rx="10" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+  <text x="565" y="790" text-anchor="middle" font-size="13" font-weight="500" fill="#412402" font-family="var(--font-sans)">Crypto counter</text>
+  <text x="565" y="808" text-anchor="middle" font-size="11" fill="#854F0B" font-family="var(--font-sans)">TX + RX interaction logged</text>
+  <text x="565" y="824" text-anchor="middle" font-size="11" fill="#854F0B" font-family="var(--font-sans)" class="counter-blink">Counter += 1</text>
+</g>
+
+<!-- Arrow from zone traversed to crypto (no event, optional dashed) -->
+<path d="M400 728 L400 790 L458 790" stroke="#B4B2A9" stroke-width="1" stroke-dasharray="4 3" fill="none" marker-end="url(#arr-w)"/>
+<text x="425" y="764" font-size="10" fill="#B4B2A9" font-family="var(--font-sans)">Any TX-RX</text>
+<text x="425" y="777" font-size="10" fill="#B4B2A9" font-family="var(--font-sans)">interaction</text>
+
+<!-- Down from crypto to ledger -->
+<line x1="565" y1="834" x2="565" y2="860" class="flow-line flow-dash" stroke="#BA7517" style="--spd:0.9s" marker-end="url(#arr)"/>
+
+<!-- Ledger / log box -->
+<g class="node-g" onclick="sendPrompt('Where is the SONET crypto interaction ledger stored?')">
+  <rect x="460" y="862" width="210" height="56" rx="10" fill="#FAC775" stroke="#633806" stroke-width="0.5"/>
+  <text x="565" y="886" text-anchor="middle" font-size="13" font-weight="500" fill="#412402" font-family="var(--font-sans)">Updated Log</text>
+  <text x="565" y="904" text-anchor="middle" font-size="11" fill="#633806" font-family="var(--font-sans)">0 Latency interaction log</text>
+</g>
+
+<!-- ═══════ LEFT SIDE: Vehicle RX unit detail ═══════ -->
+<!-- Vehicle RX card  -->
+<g class="node-g vehicle-anim" onclick="sendPrompt('What is inside the SONET vehicle RX unit?')">
+  <rect x="38" y="568" width="160" height="90" rx="10" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>
+  <text x="118" y="591" text-anchor="middle" font-size="13" font-weight="500" fill="#042C53" font-family="var(--font-sans)">Vehicle — RX unit</text>
+  <text x="118" y="609" text-anchor="middle" font-size="11" fill="#185FA5" font-family="var(--font-sans)">Installed in vehicle</text>
+  <text x="118" y="625" text-anchor="middle" font-size="11" fill="#185FA5" font-family="var(--font-sans)">Listens for LoRa TX</text>
+  <text x="118" y="641" text-anchor="middle" font-size="11" fill="#185FA5" font-family="var(--font-sans)">Suppresses horn relay</text>
+</g>
+
+<!-- Dotted link: NO zone vehicle to RX unit -->
+<path d="M120 518 L120 566" stroke="#378ADD" stroke-width="1" stroke-dasharray="4 3" fill="none" marker-end="url(#arr-w)"/>
+
+<!-- Feedback arrow: crypto counter back up to TX -->
+<path d="M460 800 L220 800 L220 336" class="flow-line flow-dash" stroke="#BA7517" stroke-width="1.5" style="--spd:2.2s" fill="none" marker-end="url(#arr)"/>
+<text x="195" y="580" text-anchor="middle" font-size="11" fill="#854F0B" font-family="var(--font-sans)">Interaction</text>
+<text x="195" y="593" text-anchor="middle" font-size="11" fill="#854F0B" font-family="var(--font-sans)">reported to TX</text>
+</svg>
+
+</div>
+</section>
+
+<br>
+<br>
+<br>
+<br>
+
+      
+      <!-- VIDEO SECTION (covers ~80% of section) -->
+      <section id="video" class="section hero-video-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">SONET in ACTION</h2>
+            <p class="section-sub">
+              Get to know about the SONET and it's products through visual representaion.
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-video-wrapper">
+          <div class="hero-video-wrapper-inner">
+            <!-- Replace src with your real Sonet video file -->
+            <video
+              src="assets/sonet.mp4"
+              autoplay
+              
+              loop
+              controls
+              playsinline
+            ></video>
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- SONET APPLICATIONS IMAGE SECTION -->
+<section class="section sonet-visual-section">
+  <div class="sonet-visual-container">
+    <img src="assets/sonet-visual.png" alt="Sonet smart city applications" />
+  </div>
+</section>
+
+      <!-- CONTACT STRIP -->
+      <section id="contact" class="section">
+        <div class="contact-strip">
+          <div class="contact-strip-text">
+            <strong>Need a silent zone around your space? You are one call away from us!</strong><br />
+            Share your use-case environment (workspace, schools, hospitals, tech-parks, bio-diversity sites) and we’ll send a tailored SONET hardware proposal.
+          </div>
+
+          <div class="contact-strip-actions">
+            <a class="contact-link" href="mailto:sharathmh2604@gmail.com">
+              <span class="icon">✉</span>
+              <span>Mail Sonet</span>
+            </a>
+            <a class="contact-link" href="tel:+919740810578">
+              <span class="icon">📞</span>
+              <span>Call sales</span> 
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER (same structure to reuse on all pages) -->
+      <footer class="site-footer">
+        <div class="footer-top">
+          <div class="footer-brand-block">
+            
+              <div class="logo">
+              <img src="logoT.png" class="logo-img">
+              <!-- <div class="logo-symbol"></div> -->
+              <div class="logo-text"> 
+                <span class="logo-text-main"></span> 
+                <span class="logo-text-sub"></span>
+              </div>
+            </div>
+            <p class="footer-about">
+            TX & RX systems, tuned for automating horn controls and smart-city developments.
+            </p>
+          </div>
+
+          <div class="footer-contact-block">
+            <h4>Contact</h4>
+            <a href="mailto:sharathmh2604@gmail.com" class="footer-contact-link">
+              <span class="icon">✉</span>
+              <span>sharathmh2604@gmail.com</span>
+            </a>
+            <a href="tel:+919740810578" class="footer-contact-link">
+              <span class="icon">📞</span>
+              <span>+91 97408 10578</span>
+            </a>
+          </div>
+
+          <div class="footer-links-block">
+            <h4>Navigate</h4>
+            <a href="sonet.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="contact.html">Contact</a>
+            <a href="transmitter.html">TX</a>
+            <a href="receiver.html">RX</a>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          © <span class="brand">SONET</span> — For the better.
+        </div>
+      </footer>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+  </html>
