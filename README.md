@@ -1,4 +1,4 @@
-<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/d5938dcd-b299-4d8f-b033-d4e1b3d8a7cc" />
+<img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/d5938dcd-b299-4d8f-b033-d4e1b3d8a7cc" />
 🚀 SONET – Smart Noise Elimination Technology
 🌐 Overview
 
