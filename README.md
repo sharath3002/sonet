@@ -3,7 +3,9 @@
 <img width="750" height="750" alt="image" src="https://github.com/user-attachments/assets/1c19145f-c1e7-4038-bf4e-cce9cbd3becf" />
 
 Smart Noise Elimination Technology
-<p align="center"> <img src="assets/logo.png" alt="SONET Logo" width="200"/> </p> <p align="center"> <img src="https://img.shields.io/badge/Status-Prototype-orange?style=for-the-badge"/> <img src="https://img.shields.io/badge/Domain-Hardware%20%7C%20IoT-blue?style=for-the-badge"/> <img src="https://img.shields.io/badge/Tech-LoRa%20RF-green?style=for-the-badge"/> <img src="https://img.shields.io/badge/Focus-Smart%20Cities-purple?style=for-the-badge"/> </p> <p align="center"> <b>Reducing Urban Noise Pollution using Smart RF-Based Control Systems</b> </p>
+<p align="center"> <img src="https://github.com/user-attachments/assets/1c19145f-c1e7-4038-bf4e-cce9cbd3becf" alt="SONET Logo" width="200"/> </p> <p align="center"> <img src="https://img.shields.io/badge/Status-Prototype-orange?style=for-the-badge"/> <img src="https://img.shields.io/badge/Domain-Hardware%20%7C%20IoT-blue?style=for-the-badge"/> <img src="https://img.shields.io/badge/Tech-LoRa%20RF-green?style=for-the-badge"/> <img src="https://img.shields.io/badge/Focus-Smart%20Cities-purple?style=for-the-badge"/> </p> <p align="center"> <b>Reducing Urban Noise Pollution using Smart RF-Based Control Systems</b> </p>
+
+
 🌐 Live Website
 
 🔗 https://sonetx.netlify.app/
