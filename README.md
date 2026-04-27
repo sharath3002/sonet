@@ -1,120 +1,102 @@
-<img width="200" height="200" alt="image" src="https://github.com/user-attachments/assets/d5938dcd-b299-4d8f-b033-d4e1b3d8a7cc" />
-🚀 SONET – Smart Noise Elimination Technology
-🌐 Overview
+🚀 SONET
 
-SONET is a hardware-based innovation focused on reducing vehicle horn noise pollution in urban environments. It introduces a smart system that automatically controls vehicle horns in designated silence zones such as hospitals, schools, and sensitive public areas.
+<img width="750" height="750" alt="image" src="https://github.com/user-attachments/assets/1c19145f-c1e7-4038-bf4e-cce9cbd3becf" />
 
-SONET aims to bring discipline and automation into traffic noise management by integrating radio frequency communication with secure hardware modules.
+Smart Noise Elimination Technology
+<p align="center"> <img src="assets/logo.png" alt="SONET Logo" width="200"/> </p> <p align="center"> <img src="https://img.shields.io/badge/Status-Prototype-orange?style=for-the-badge"/> <img src="https://img.shields.io/badge/Domain-Hardware%20%7C%20IoT-blue?style=for-the-badge"/> <img src="https://img.shields.io/badge/Tech-LoRa%20RF-green?style=for-the-badge"/> <img src="https://img.shields.io/badge/Focus-Smart%20Cities-purple?style=for-the-badge"/> </p> <p align="center"> <b>Reducing Urban Noise Pollution using Smart RF-Based Control Systems</b> </p>
+🌐 Live Website
 
-🎯 Problem Statement
+🔗 https://sonetx.netlify.app/
 
-Urban environments face severe sound pollution due to unnecessary honking, especially in:
+🧠 What is SONET?
 
-Hospitals 🏥
-Schools 🏫
-Residential zones 🏠
-Traffic-heavy intersections 🚦
+SONET is a next-generation hardware solution designed to eliminate unnecessary vehicle honking in urban areas.
 
-Despite “No Honking” signs, there is no effective enforcement mechanism. This leads to:
+It introduces an intelligent system where vehicle horns are automatically controlled in designated silence zones using secure long-range wireless communication.
 
-Health issues (stress, migraines, hearing problems)
-Disturbance in sensitive environments
-Reduced quality of life in cities
+🎯 Problem
+
+Cities are loud — and there’s no real enforcement.
+
+🚫 “No Honking” signs are ignored
+🏥 Hospitals & schools suffer constant disturbance
+😣 Leads to stress, migraines, hearing issues
+🚦 Traffic zones become chaotic
 💡 Solution
 
-SONET introduces a TX–RX (Transmitter–Receiver) system that automatically disables vehicle horns within defined zones.
+SONET uses a TX–RX communication system:
 
-🔧 How It Works
-Transmitter (TX) is installed in a silent zone
-Receiver (RX) is installed in vehicles
-When a vehicle enters the TX range:
-TX sends a secure RF signal
-RX receives and temporarily disables the horn system
-Once the vehicle exits the zone:
-Horn functionality is restored
-📡 Technology Used
-🔹 LoRa (Long Range RF Communication)
+📡 Transmitter (TX) → Installed in silent zones
+🚗 Receiver (RX) → Installed in vehicles
+⚙️ Working Principle
 
-SONET uses LoRa-based RF communication for long-distance, low-power signaling.
+✔ No manual enforcement
+✔ Fully automatic
+✔ Real-time control
 
-Works over frequencies like 865–867 MHz (India legal band)
-Enables communication over hundreds of meters to kilometers
-Highly reliable in urban environments
-
-LoRa allows devices to communicate wirelessly over long distances with low power consumption using radio waves
-
-🔐 Security Layer (Cryptographic Protection)
-
-To prevent misuse or spoofing:
-
-Each signal is encrypted using:
-Secret key
-Counter-based system
-Cryptographic algorithm
-Ensures only authorized transmitters can control vehicles
-📦 Product Line
+📡 Core Technology
+🔹 LoRa RF Communication
+Frequency: 865–867 MHz (India legal band)
+Long-range (500m – 1km+)
+Low power consumption
+🔐 Secure Communication
+Encrypted signal transmission
+Counter-based cryptographic validation
+Prevents spoofing or misuse
+📦 Product Architecture
 🚗 Receiver (RX)
-Installed inside vehicles
-Integrated with horn circuitry
-Automatically responds to TX signals
+Installed in vehicle horn system
+Detects TX signals
+Disables horn automatically
 📡 Transmitter (TX)
-
-Available in multiple variants:
-
-500m range
-1 km range
-1 km+ range
-
-Used in:
-
-Hospitals
-Schools
-Smart city infrastructure
-
-🌍 Use Cases
-Smart Cities 🏙️
-Hospital Silence Zones 🏥
-School Areas 🏫
-Industrial Zones 🏭
-Traffic Control Systems 🚦
+Installed in silence zones
+Broadcasts control signals
+🎯 Product Variants
+Product	Range	Use Case
+TX Basic	500m	Small zones
+TX Standard	1km	Medium areas
+TX Advanced	1km+	Large smart zones
+🏙️ Use Cases
+🏥 Hospitals
+🏫 Schools
+🏢 Corporate Zones
+🚦 Traffic Intersections
+🌿 Eco-sensitive Areas
 💰 Business Model
-
-SONET generates revenue through:
-
-1. Automobile Integration
+1️⃣ Automobile Integration
 Partner with manufacturers
 Pre-install RX modules in vehicles
-2. Hardware Sales
-Sell TX & RX devices directly
+2️⃣ Hardware Sales
+Sell TX & RX devices
 Retrofit existing vehicles
-3. Smart City Projects
-Government & infrastructure deployment
-Mandatory silent-zone implementation
+3️⃣ Smart City Deployment
+Government partnerships
+Infrastructure-level installations
 📈 Market Opportunity
-Over 300 million vehicles in India alone
-Global expansion potential
-Growing demand for smart city solutions
-🚧 Current Status
-Stage: Ideation + Prototyping
-Working on:
-Circuit design
-RF communication modules
-Hardware prototypes
+🇮🇳 300M+ vehicles in India
+🌍 Global scalability
+🚀 Smart city expansion
+🧪 Current Status
++ Ideation Completed
++ Prototype Design Ongoing
+- Manufacturing Pending
+- Market Deployment Pending
 🧑‍💻 Founder
 
 Sharath M H
 
-Full-stack developer
-Hardware enthusiast
-Working on:
-Product development
-Website & deployment
-Circuit design & prototyping
-🌐 Website
+Full-stack Developer
+Hardware Innovator
+Building SONET from scratch
+🛠️ Tech Stack
+⚡ RF Communication (LoRa)
+🔌 Embedded Systems
+🔐 Cryptographic Security Layer
+🌐 Web (for product showcase)
+🔮 Vision
 
-👉 https://sonetx.netlify.app/
+“Make cities quieter, healthier, and smarter.”
 
-🔮 Future Vision
-Make noise-free cities a reality
-Standardize silent-zone enforcement globally
-Integrate SONET into next-gen smart vehicles
+🌍 Noise-free urban environments
+🚗 Standardized vehicle control systems
+🏙️ Integration with smart city infrastructure
