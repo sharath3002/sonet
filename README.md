@@ -4,13 +4,14 @@ Smart Noise Elimination Technology
 
 <p align="center"> <img src="https://github.com/user-attachments/assets/1c19145f-c1e7-4038-bf4e-cce9cbd3becf" alt="SONET Logo" width="200"/> </p> <p align="center"> <img src="https://img.shields.io/badge/Status-Prototype-orange?style=for-the-badge"/> <img src="https://img.shields.io/badge/Domain-Hardware%20%7C%20IoT-blue?style=for-the-badge"/> <img src="https://img.shields.io/badge/Tech-LoRa%20RF-green?style=for-the-badge"/> <img src="https://img.shields.io/badge/Focus-Smart%20Cities-purple?style=for-the-badge"/> </p> <p align="center"> <b>Reducing Urban Noise Pollution using Smart RF-Based Control Systems</b> </p>
 
+<br></br>
 
 
 🌐 Live Website
 
 🔗 https://sonetx.netlify.app/
 
-
+<br></br>
 
 🧠 What is SONET?
 
@@ -19,6 +20,9 @@ SONET is a next-generation hardware solution designed to eliminate unnecessary v
 
 
 It introduces an intelligent system where vehicle horns are automatically controlled in designated silence zones using secure long-range wireless communication.
+
+
+<br></br>
 
 
 🎯 Problem
@@ -38,7 +42,7 @@ Cities are loud — and there’s no real enforcement.
 💡 Solution
 
 
-
+<br></br>
 
 
 SONET uses a TX–RX communication system:
@@ -48,7 +52,7 @@ SONET uses a TX–RX communication system:
 
 🚗 Receiver (RX) → Installed in vehicles
 
-
+<br></br>
 
 
 ⚙️ Working Principle
@@ -61,10 +65,12 @@ SONET uses a TX–RX communication system:
 ✔ Real-time control
 
 
-
+<br></br>
+<br></br>
 
 📡 Core Technology
 
+<br></br>
 
 🔹 LoRa RF Communication
 
@@ -74,7 +80,7 @@ Long-range (500m – 1km+)
 
 Low power consumption
 
-
+<br></br>
 
 🔐 Secure Communication
 
@@ -84,7 +90,7 @@ Counter-based cryptographic validation
 
 Prevents spoofing or misuse
 
-
+<br></br>
 
 📦 Product Architecture
 
@@ -96,7 +102,7 @@ Detects TX signals
 
 Disables horn automatically
 
-
+<br></br>
 
 
 📡 Transmitter (TX)
@@ -105,6 +111,7 @@ Installed in silence zones
 
 Broadcasts control signals
 
+<br></br>
 
 
 🎯 Product Variants
@@ -118,9 +125,11 @@ Product	Range	Use Case
 +TX Advanced	1km+	Large smart zones
 
 
+<br></br>
 
 
 🏙️ Use Cases
+<br></br>
 
 🏥 Hospitals
 
@@ -135,7 +144,7 @@ Product	Range	Use Case
 💰 Business Model
 
 
-
+<br></br>
 
 
 1️⃣ Automobile Integration
@@ -146,6 +155,9 @@ Pre-install RX modules in vehicles
 
 
 
+<br></br>
+
+
 2️⃣ Hardware Sales
 
 Sell TX & RX devices
@@ -153,6 +165,7 @@ Sell TX & RX devices
 Retrofit existing vehicles
 
 
+<br></br>
 
 
 3️⃣ Smart City Deployment
@@ -162,7 +175,7 @@ Government partnerships
 Infrastructure-level installations
 
 
-
+<br></br>
 
 
 📈 Market Opportunity
@@ -174,6 +187,7 @@ Infrastructure-level installations
 🚀 Smart city expansion
 
 
+<br></br>
 
 
 🧪 Current Status
@@ -186,6 +200,7 @@ Infrastructure-level installations
   
 - Market Deployment Pending
   
+<br></br>
 
 
 
@@ -194,6 +209,7 @@ Infrastructure-level installations
 
 Sharath M H
 
+<br></br>
 
 Software Engineer
 
@@ -207,6 +223,7 @@ Building SONET from scratch
 
 
 
+<br></br>
 
 
 🛠️ Tech Stack
@@ -221,11 +238,13 @@ Building SONET from scratch
 🌐 Web (for product showcase)
 
 
+<br></br>
 
 
 
 🔮 Vision
 
+<br></br>
 
 “Make cities quieter, healthier, and smarter.”
 
